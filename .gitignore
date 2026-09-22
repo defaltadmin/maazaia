@@ -1,0 +1,22 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.idea/
+.vscode/
+!.vscode/extensions.json
+
+# local dev + Cloudflare tooling
+node_modules/
+.wrangler/
+.dev.vars
+.env
+.env.*
+!.env.example
+dist/
+.cache/
+
+# logs
+*.log
+npm-debug.log*

@@ -1,0 +1,7 @@
+# Cloudflare Pages redirects. Left column = request path, right = destination, then status.
+/en/*        /:splat        301
+/arabic/*    /ar/:splat     301
+/careers     /jobseekers    301
+/jobs        /jobseekers    301
+/contact-us  /contact       301
+/privacy-policy /privacy    301
