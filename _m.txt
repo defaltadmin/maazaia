@@ -1,9 +1,18 @@
-fix: move CSP comment out of the _headers rule block
+fix: satisfy script-src CSP — no inline scripts or onload handlers
 
-The previous commit added a /* ... */ comment inside the /* ... */ header
-block in _headers. Cloudflare Pages only supports # comments; anything
-else inside a rule block makes the deployment fail to build, which is
-why the Arabic legal pages never went live.
+Lighthouse against production reported two CSP violations that the local
+server could not catch, because it sends no Content-Security-Policy:
 
-The CSP itself is unchanged and still allows static.cloudflareinsights.com
-so Cloudflare Web Analytics stops being blocked.
+- the inline no-flash theme script was blocked by script-src
+- the font stylesheet's onload="this.media='all'" handler was blocked
+
+Best Practices was sitting at 92 as a result.
+
+Both are now CSP-clean without weakening the policy:
+
+- the theme script moved into assets/js/main.js, which is already loaded
+  synchronously in <head>, so it still runs before first paint
+- the font link keeps media="print" but is switched to media="all" by an
+  addEventListener in main.js instead of an inline attribute
+
+script-src is unchanged and still has no 'unsafe-inline'.

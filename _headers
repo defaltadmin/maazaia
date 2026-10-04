@@ -5,6 +5,11 @@
 # the browser blocks it - which logs a CSP console error and drops the
 # Best Practices score. Web Analytics is cookie-free and privacy-preserving.
 #
+# script-src deliberately omits 'unsafe-inline'. The theme is applied by a
+# small external script loaded synchronously in <head> rather than inline,
+# and the async font swap uses addEventListener instead of an onload
+# attribute, so no inline code is needed anywhere.
+#
 # NOTE: this file format only supports # comments at the top level.
 # A /* ... */ comment inside a rule block makes the whole deployment
 # fail to build. Keep explanatory notes above the blocks.
