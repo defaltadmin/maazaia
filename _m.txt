@@ -1,10 +1,15 @@
-fix: repair font <link> href broken by a bad regex substitution
+perf: split the no-flash theme script out of main.js
 
-The previous pass built the replacement string with str.format(), which
-does not expand regex backreferences. The literal text \1 was written into
-every page as the stylesheet href, so the browser requested
-https://maazaia.com/1 three times and refused it as an unsupported MIME
-type. That was the remaining Best Practices deduction (96, not 100).
+Loading all of main.js synchronously in <head> to avoid a flash of the
+wrong theme cost First Contentful Paint 0.9s -> 4.1s, because a
+render-blocking script delays the first paint by a full round trip.
 
-All nine pages now carry the real fonts.googleapis.com URL in the
-preload, the async stylesheet link and the noscript fallback.
+The theme code moved to assets/js/theme.js (841 bytes) which is preloaded
+and loaded synchronously. That is small enough to be negligible, and it
+still runs before the body is parsed so the flash does not come back.
+main.js stays deferred and keeps everything else.
+
+Also de-duplicated the deferred main.js tag on 404, privacy and terms,
+which ended up with two after the split.
+
+Verified: Lighthouse 100/100/100/100, zero console errors.

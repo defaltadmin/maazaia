@@ -1,25 +1,9 @@
-/* Applies the stored theme before first paint.
-   Loaded synchronously in <head> (not deferred) precisely so it runs
-   before the body renders, which prevents a flash of the wrong theme.
-   Kept as a separate file rather than inline because the Content Security
-   Policy does not permit 'unsafe-inline' for scripts. */
-(() => {
-  try {
-    const KEY = 'mz-theme';
-    const stored = localStorage.getItem(KEY);
-    const theme = (stored === 'dark' || stored === 'light')
-      ? stored
-      : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    document.documentElement.setAttribute('data-theme', theme);
-    document.documentElement.style.colorScheme = theme;
-  } catch (e) {
-    /* storage blocked — fall back to the light theme already in the CSS */
-  }
-})();
-
 /* Maazaia — progressive enhancement only.
    Every feature here degrades gracefully: the page is fully readable
-   and navigable if this file fails to load. */
+   and navigable if this file fails to load.
+
+   The initial theme is applied by assets/js/theme.js, which runs
+   synchronously in <head>. This file is deferred. */
 (() => {
   'use strict';
 
