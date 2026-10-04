@@ -1,7 +1,56 @@
-# Assumptions & placeholders
+# ASSUMPTIONS.md — resolved
 
-Everything below was invented to make the site look finished. Each line is something to
-confirm, correct or delete before launch. Nothing here is a claim Maazaia has verified.
+**Status as of 2026-10-04: every fabricated fact listed previously has been
+removed from the site. Nothing on maazaia.com is invented any more.**
+
+The previous version of this file tracked placeholder company data. Rather than
+keep a list of things that are no longer published, this file now records what
+was removed and what you need to supply if you want it back.
+
+## What was removed, and why
+
+| Removed | Reason |
+|---|---|
+| Phone `+966 11 000 0000`, WhatsApp number | Never a working number |
+| Postal address (Al Murooj Tower, Riyadh) and map coordinates | Fabricated |
+| Offices in Riyadh / Jeddah / Dammam | Fabricated |
+| MHRSD licence and commercial registration numbers | Fabricated |
+| "Licensed by MHRSD", "WPS-compliant" | Claims that cannot be made without the real licence |
+| Statistics: 4,000+ workers, 9 source markets, 21-day mobilisation, 96% renewal | Invented |
+| "Founded [YEAR]", company origin narrative | Invented |
+| Leadership names | Placeholders, no real people |
+| `sales@`, `careers@`, `privacy@` mailboxes | Not confirmed to exist |
+| Business hours | Assumed, never confirmed |
+
+**Contact is now email only:** `info@maazaia.com`. Every CTA on the site is a
+`mailto:` link. This is intentional — one channel is easier to keep correct.
+
+## What you can add back, once real
+
+Nothing is blocked; these are just the things that make a company site
+convincing when you have the actual values:
+
+1. **Licence and CR numbers.** Trust badges for manpower suppliers matter in this
+   sector. Put them on the homepage and in the legal pages once issued.
+2. **A real phone number.** Especially WhatsApp — it is how Saudi labour
+   supply actually runs.
+3. **An office address.** Needed for `EmploymentAgency` JSON-LD `address` and
+   `geo`, and for Google Business Profile.
+4. **Business hours.** Useful in the footer and in structured data.
+5. **Real numbers, if you have them.** Even two or three credible figures
+   ("X workers deployed since YYYY") outperform nothing, provided they are true.
+6. **Photography.** There is no imagery on the site. Real photos of crews and
+   sites would change the impression more than any design change.
+
+## Still outstanding
+
+- The logo (`assets/img/logo-placeholder.svg`) is a placeholder "M" mark.
+- The Arabic name **مازايا** needs confirming against the registered name.
+- `privacy.html` is drafted against the PDPL but has not been reviewed by Saudi
+  counsel, and the retention periods in it are drafting defaults, not legal
+  advice.
+- Arabic copy is original MSA written for this site. A native Saudi reviewer
+  should check the trade names and job titles.
 
 ## A. Branding (no assets were provided)
 
