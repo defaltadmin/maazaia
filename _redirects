@@ -1,7 +1,31 @@
-# Cloudflare Pages redirects. Left column = request path, right = destination, then status.
-/en/*        /:splat        301
-/arabic/*    /ar/:splat     301
-/careers     /jobseekers    301
-/jobs        /jobseekers    301
-/contact-us  /contact       301
-/privacy-policy /privacy    301
+# Cloudflare Pages redirects — left column = request path, right = destination, then status.
+#
+# The site was consolidated into a single landing page on 2026-10-04.
+# Old page URLs are permanently redirected to the homepage so that any
+# existing links, bookmarks or search results keep working.
+
+# Old top-level pages -> homepage
+/about      /     301
+/services    /     301
+/industries /     301
+/employers  /     301
+/jobseekers  /     301
+/contact    /     301
+/careers    /     301
+/jobs       /     301
+/contact-us /     301
+
+# Arabic mirrors of the removed pages -> Arabic homepage
+/ar/about      /ar/  301
+/ar/services    /ar/  301
+/ar/industries /ar/  301
+/ar/employers  /ar/  301
+/ar/jobseekers  /ar/  301
+/ar/contact    /ar/  301
+
+# Legacy path prefixes
+/en/*      /:splat   301
+/arabic/*  /ar/:splat 301
+
+# Legacy legal-page aliases
+/privacy-policy /privacy  301

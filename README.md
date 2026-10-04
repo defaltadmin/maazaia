@@ -4,8 +4,11 @@ Bilingual (English / Arabic) static website for **Maazaia**, a manpower outsourc
 recruitment company in the Kingdom of Saudi Arabia.
 
 Plain HTML, CSS and JavaScript. **No build step, no framework, no npm install required.**
-Push to GitHub, connect to Cloudflare Pages, done. Form handling runs on Cloudflare Pages
-Functions (`/functions`), so there is no traditional backend to host.
+Push to GitHub, connect to Cloudflare Pages, done.
+
+> **This is a single-page marketing site.** Everything a visitor needs is on the
+> homepage, reached through anchor links. There are no separate service or contact
+> pages to navigate.
 
 > **Read `ASSUMPTIONS.md` before launch.** Branding, licence numbers, statistics, address and
 > phone numbers are all placeholders. Every one of them is listed there with its file location.
@@ -16,44 +19,62 @@ Functions (`/functions`), so there is no traditional backend to host.
 
 ```
 /
-├── index.html              English home
-├── about.html              About us / licensing & credibility
-├── services.html           Services detail
-├── industries.html         Industries served
-├── employers.html          Request staff form  -> POST /api/contact
-├── jobseekers.html         CV submission form  -> POST /api/apply
-├── contact.html            Address, phone, email, click-to-load map, message form
-├── privacy.html            PDPL privacy policy (complete text)
+├── index.html              English one-page site
+├── privacy.html            PDPL privacy policy
 ├── terms.html              Terms of use
 ├── 404.html                Not-found page (served automatically by Pages)
 │
-├── ar/                     Arabic mirror of all nine pages, dir="rtl"
-│   ├── index.html … terms.html
+├── ar/index.html           Arabic one-page site, dir="rtl"
 │
 ├── assets/
 │   ├── css/styles.css      Whole design system, tokens at the top
-│   ├── css/rtl.css         RTL-only overrides, loaded on /ar/ pages
-│   ├── js/main.js          Nav drawer, scroll reveal, ToC highlight, click-to-load map
-│   ├── js/forms.js         Validation, Turnstile check, fetch submit, states
-│   └── img/                Placeholder logo, favicon, Apple icon, OG image
+│   ├── js/main.js          Mobile nav drawer
+│   └── img/                Logo, favicon, Apple icon, OG image (PNG + SVG)
 │
-├── functions/api/
-│   ├── _shared.js          Turnstile verification, payload parsing, mail sending
-│   ├── contact.js          POST /api/contact  (employer + general enquiries)
-│   └── apply.js            POST /api/apply    (applications, CV attachment)
+├── robots.txt              Crawl rules + sitemap pointer
+├── sitemap.xml             4 URLs (home, /ar/, privacy, terms)
+├── _headers                Security headers, CSP, cache rules
+├── _redirects              301s from the old page URLs to the homepage
 │
-├── _headers                Security headers + cache policy (Cloudflare Pages)
-├── _redirects              Legacy path redirects
-├── robots.txt
-├── sitemap.xml             18 URLs with hreflang alternates
+├── ASSUMPTIONS.md          Every fabricated fact, with file locations
+└── README.md
+```
+
+## 2. Page structure
+
+One scrolling page, six sections:
+
+| Anchor | Section | Purpose |
+|---|---|---|
+| — | Hero | Value proposition + two CTAs (employers / jobseekers) |
+| `#what` | Who we are | Positioning, the compliance angle |
+| `#services` | What we do | Four services, the core of the offer |
+| `#sectors` | Sectors | Industries served, as scannable pills |
+| `#how` | How it works | Four-step process |
+| `#contact` | Contact | Details + employer / jobseeker panels |
+
+## 3. Old URLs
+
+The site previously had nine separate pages. They were removed on 2026-10-04 and
+all redirect to the homepage via 301 in `_redirects`, so existing links, bookmarks
+and search results keep working:
+
+`/about` `/services` `/industries` `/employers` `/jobseekers` `/contact`
+and their `/ar/` equivalents.
 ├── .env.example            Names of the environment variables you must set
 ├── .gitignore
 ├── ASSUMPTIONS.md          Everything invented that you need to confirm or replace
 └── README.md
 ```
 
-URLs are extensionless in production: Cloudflare Pages serves `about.html` at `/about`
-and redirects `/about.html` to `/about`. All internal links already use the clean form.
+URLs are extensionless in production: Cloudflare Pages serves `index.html` at `/` and
+`/about` (which now 301s to `/`) and redirects `/index.html` to `/`. Internal links use
+the clean form.
+
+> **Note:** the Pages Functions (`functions/api/`) and the form-validation JS were used by
+> the old multi-page site. The contact CTAs on the single-page site are `mailto:` links,
+> so no backend is required. The functions are still in the repo if you later want a
+> real contact form — see section 5.
 
 ---
 
@@ -81,15 +102,19 @@ HTML is Cloudflare's **test key**, which always passes, so forms work locally ou
 
 There is no templating layer on purpose: open the HTML and edit the text.
 
-- **English copy** lives in the root `*.html` files, **Arabic copy** in `ar/*.html`.
+- **English copy** lives in `index.html`, **Arabic copy** in `ar/index.html`.
 - The two locales are structurally identical. When you add a section to one, mirror it in the
   other, and keep the `<link rel="alternate" hreflang="…">` tags in `<head>` in sync.
-- Arabic pages carry `dir="rtl"` on `<html>` and load `rtl.css`. The layout uses CSS logical
-  properties (`padding-inline`, `margin-inline-start`), so most changes mirror automatically.
+- Arabic pages carry `dir="rtl"` on `<html>`. The layout uses CSS logical properties
+  (`padding-inline`, `margin-inline-start`), so most changes mirror automatically.
   Wrap Latin fragments (emails, phone numbers) in `<span class="ltr">` inside Arabic text.
-- Add a new page: create `page.html` and `ar/page.html`, add both to `sitemap.xml`, and add the
-  nav entry to the header **and** the mobile drawer in every page (the nav is duplicated per
-  file, which is the cost of having no build step; 20 files, find-and-replace works fine).
+- **Save all HTML as UTF-8 without BOM.** Do not edit these files with PowerShell
+  `Set-Content -Encoding UTF8` — it re-encodes Arabic text and corrupts it. Use an editor
+  (VS Code) or a Python script that opens files with `encoding="utf-8"`.
+- To add a section: add the `<section>` to both `index.html` and `ar/index.html`, then add
+  the matching anchor to the header nav and the footer link list in both files, plus in
+  `404.html`, `privacy.html` and `terms.html` (the nav is duplicated per file, which is the
+  cost of having no build step).
 
 ---
 
@@ -114,9 +139,10 @@ alone shifts the whole page coherently. Fonts load from Google Fonts in each `<h
 
 The logo is a placeholder wordmark plus an inline SVG mark. Replace:
 
-1. `assets/img/logo-placeholder.svg`, `assets/img/favicon.svg`, `assets/img/apple-touch-icon.png`
-2. `assets/img/og-image.png` (1200x630, used for social sharing)
-3. The inline `<svg class="brand__mark">` in the header and footer of all 20 HTML files
+1. `assets/img/logo-placeholder.svg`, `assets/img/favicon.svg`, `assets/img/apple-touch-icon.svg`
+2. `assets/img/og-image.png` (1200x630, used for social sharing — platforms do not render
+   SVG for `og:image`, so the PNG is the one that matters; the `.svg` is kept as the source)
+3. The inline `<svg class="brand__mark">` in the header and footer of every HTML file
 4. `<meta name="theme-color" content="#1c3b35">` in each `<head>`
 
 ---
@@ -218,10 +244,8 @@ and deployed with no extra configuration.
 
 ### 6.4 Post-launch checklist
 
-- [ ] Real Turnstile site key in all six form pages, secret key set as a variable
-- [ ] Submit each form once in production and confirm the email arrives
 - [ ] Replace every `[BRACKETED]` placeholder (see `ASSUMPTIONS.md`)
-- [ ] Verify the address, phone, WhatsApp number and map coordinates in `contact.html`
+- [ ] Verify the address, phone and WhatsApp number in `index.html`
 - [ ] Legal review of `privacy.html` and `terms.html` by Saudi counsel
 - [ ] Submit `https://maazaia.com/sitemap.xml` in Google Search Console and Bing Webmaster Tools
 - [ ] Check the hreflang pairs with Search Console's international targeting report
@@ -234,13 +258,20 @@ and deployed with no extra configuration.
 
 Already in place: unique `<title>` and meta description per page and per locale, canonical
 URLs, reciprocal `hreflang` (`en`, `ar`, `x-default`) in both the HTML head and the sitemap,
-Open Graph and Twitter cards with a 1200x630 image, `EmploymentAgency` JSON-LD with address,
-geo coordinates and opening hours, `FAQPage` JSON-LD on both homepages, `robots.txt`
-disallowing `/api/`, and a sitemap covering all 18 indexable URLs.
+Open Graph and Twitter cards with a real 1200x630 PNG, `EmploymentAgency` JSON-LD with
+address, geo coordinates, service catalogue and area served, `robots.txt` with crawl
+directives, and a sitemap covering all 4 indexable URLs.
 
 Not included by choice: analytics. No tracking script is loaded, so no cookie banner is
 needed. If you add analytics, add a consent mechanism first and update the cookies section of
 the privacy policy (both locales).
+
+### Keeping it that way
+
+- Every page has exactly one `<h1>`, a unique title and a meta description.
+- The old page URLs 301 to the homepage, so existing links and search rankings survive.
+- If you ever add a page back, add it to `sitemap.xml` with an `xhtml:link` hreflang group
+  for each locale.
 
 ---
 

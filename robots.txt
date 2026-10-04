@@ -1,5 +1,17 @@
+# robots.txt for maazaia.com
+# Single-page marketing site — all public.
+
 User-agent: *
 Allow: /
 Disallow: /api/
 
+# Search engines: the whole site is one page. Prefer the English homepage,
+# but serve the Arabic version to Arabic-language queries.
 Sitemap: https://maazaia.com/sitemap.xml
+
+# Politeness: standard crawl delay for large-scale crawlers.
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
