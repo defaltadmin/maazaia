@@ -24,7 +24,7 @@
   --on-dark:      #f2f6f5;
   --on-dark-soft: #b9c8c6;
   --on-dark-line: rgba(255,255,255,.16);
-  --sans:  "IBM Plex Sans Arabic", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --sans:  "IBM Plex Sans Arabic", var(--font-fallback);
   --serif: "Newsreader", Georgia, "Times New Roman", serif;
   --r-sm: 4px;
   --r-md: 8px;
@@ -76,6 +76,16 @@ body > * { position: relative; z-index: 1; }
 .site-head__in { min-height: 74px; display: flex; align-items: center; gap: 1.6rem; }
 .site-head.is-stuck { box-shadow: 0 1px 0 var(--line), 0 10px 30px rgba(16,22,26,.05); }
 .brand { display: inline-flex; align-items: center; gap: .6rem; color: var(--brand-deep); font-weight: 650; font-size: 1.12rem; letter-spacing: -.01em; text-decoration: none; flex: none; }
+/* The header sits on --paper, which in dark mode is near-black. The brand
+   mark text uses --brand-deep, which is *also* near-black there, so it has
+   to be re-pointed at the ink token for the theme to work. */
+:root[data-theme="dark"] .site-head .brand { color: var(--ink); }
+
+/* On dark surfaces --brand-deep resolves to a near-black that is invisible
+   against a dark page. Only text links need remapping; buttons keep their
+   own colours, which are set explicitly. */
+.band--ink .foot__list a, .dark .foot__list a, .site-foot .foot__list a,
+.band--ink .brand, .dark .brand, .site-foot .brand { color: var(--on-dark); }
 .brand__mark { width: 34px; height: 34px; }
 .nav { margin-inline: auto; }
 .nav__list { display: flex; gap: 1.65rem; list-style: none; padding: 0; margin: 0; }
@@ -98,15 +108,28 @@ body > * { position: relative; z-index: 1; }
   transition: background .18s var(--ease), transform .18s var(--ease), box-shadow .18s var(--ease);
 }
 .btn:hover { background: var(--brand-deep); transform: translateY(-1px); box-shadow: var(--sh-md); }
+.btn:active { transform: translateY(0) scale(.985); }
+/* --brand doubles as a link colour on light surfaces, but as a button
+   fill it needs the dedicated token so the white label stays legible. */
+.btn { background: var(--brand-fill, var(--brand)); }
+.btn:hover { background: var(--brand-deep); }
 .btn:active { transform: translateY(0); }
 /* Darker brass so the white label clears 4.5:1 */
 .btn--accent { background: #7d5a1c; color: #fff; }
 .btn--accent:hover { background: #6b4c17; }
+/* Ghost button on a dark surface — light label, light border.
+   Without this the label inherits the dark ink colour and is unreadable. */
+.btn--ondark { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.38); color: #fff; }
+.btn--ondark:hover { background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.6); }
 .btn--ghost { background: transparent; border-color: var(--line); color: var(--ink); }
 .btn--ghost:hover { background: var(--surface); border-color: var(--muted); }
 .btn--lg { padding: .85rem 1.5rem; font-size: 1rem; }
 .i { width: 1.05em; height: 1.05em; flex: none; }
 /* ---------- sections ---------- */
+main { position: relative; }
+/* Sections sit above the ambient layer. */
+main > section { position: relative; z-index: 1; }
+
 .section { padding-block: clamp(3.75rem, 2.2rem + 5.6vw, 7rem); }
 .band { background: var(--surface); }
 /* Dark band re-declares its own palette so light text can never
@@ -156,6 +179,12 @@ body > * { position: relative; z-index: 1; }
 .hero > * { position: relative; z-index: 1; }
 .hero__grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, .8fr); gap: clamp(2.5rem, 1.5rem + 3vw, 4.5rem); align-items: end; }
 .hero h1 { margin-bottom: 1.1rem; max-width: 20ch; }
+/* Reserve the height the hero copy will occupy once the webfont has
+   loaded. Without this the Arabic font swap reflows the paragraph and
+   produces a measurable layout shift on first paint. The reserve is on
+   the grid itself, not a column, because the shift originates in
+   whichever column the browser re-lays out first. */
+.hero__grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, .8fr); gap: clamp(2.5rem, 1.5rem + 3vw, 4.5rem); align-items: end; }
 .hero h1 em { font-style: normal; color: var(--accent-lift); }
 .hero__sub { max-width: 58ch; color: var(--on-dark-soft); font-size: clamp(1.06rem, 1rem + .45vw, 1.26rem); margin-bottom: 2rem; }
 .hero__quote {
@@ -275,6 +304,142 @@ body > * { position: relative; z-index: 1; }
 .cookie__actions { display: flex; gap: .5rem; flex-wrap: wrap; }
 .cookie__actions .btn { min-height: 38px; padding: .45rem .9rem; font-size: .87rem; }
 
+/* ---------- web font loading ----------
+   Arabic webfonts reflow noticeably when they swap in, which cost ~0.07
+   CLS in the hero. Two mitigations:
+
+   1. A metric-adjusted fallback, so the pre-swap text is already close
+      to the webfont's metrics.
+   2. The font files are preloaded, so the swap happens as early as
+      possible — see the <link rel="preload"> in each page's <head>.
+
+   Values are deliberately conservative: an over-scaled fallback shifts
+   text further than the swap it was meant to prevent. */
+@font-face {
+  font-family: "Plex Fallback";
+  src: local("Segoe UI"), local("Tahoma"), local("Arial");
+  size-adjust: 100%;
+  ascent-override: 90%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
+:root { --font-fallback: "Plex Fallback", "Segoe UI", system-ui, sans-serif; }
+
+/* ---------- theme: dark mode ----------
+   Applied via [data-theme] on <html>, set by an inline script before
+   paint to avoid a flash. Follows the OS preference by default. */
+:root[data-theme="dark"] {
+  --paper:      #0c1113;
+  --surface:    #121a1d;
+  --ink:        #e8edec;
+  --ink-soft:   #b3c0be;
+  --muted:      #8d9c9a;
+  --line:       #23302f;
+  --line-soft:  #1a2423;
+  /* A lighter teal reads as text on the dark surface, but white-on-teal
+     only reaches 3.3:1, so the button fill needs its own deeper token. */
+  --brand:      #6fc3b3;
+  --brand-fill: #17534c;
+  --brand-deep: #0a1715;
+  --brand-ink:  #060f0e;
+  --accent:     #d9a24e;
+  --accent-lift:#e0b469;
+  --accent-tint:#1d1913;
+  --on-dark:      #eef4f2;
+  --on-dark-soft: #a9bcb9;
+  --on-dark-line: rgba(255,255,255,.14);
+  --sh-sm: 0 1px 2px rgba(0,0,0,.4);
+  --sh-md: 0 4px 16px rgba(0,0,0,.45);
+  --sh-lg: 0 18px 48px rgba(0,0,0,.55);
+}
+/* Components that hard-code light values need overriding in dark. */
+:root[data-theme="dark"] .btn--ondark { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.3); }
+:root[data-theme="dark"] .hero { border-radius: 0; }
+:root[data-theme="dark"] .cookie { background: var(--surface); }
+:root[data-theme="dark"] .card,
+:root[data-theme="dark"] .email-panel,
+:root[data-theme="dark"] .audience__col { background: var(--surface); }
+:root[data-theme="dark"] .site-head { background: color-mix(in oklab, var(--paper) 82%, transparent); }
+
+/* Theme toggle button */
+.theme-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; flex: none;
+  border: 1px solid var(--line); border-radius: var(--r-sm);
+  background: transparent; color: var(--ink-soft); cursor: pointer;
+  transition: background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
+}
+.theme-btn:hover { background: var(--surface); color: var(--ink); border-color: var(--muted); }
+.theme-btn svg { width: 18px; height: 18px; }
+.theme-btn .icon-sun { display: none; }
+:root[data-theme="dark"] .theme-btn .icon-sun { display: block; }
+:root[data-theme="dark"] .theme-btn .icon-moon { display: none; }
+
+/* ---------- animated ambient background ----------
+   Slow, low-contrast drift. Absolutely positioned and clipped so it can
+   never affect document height — as a normal flow child it inflated
+   <main> and caused a large cumulative layout shift on the Arabic page.
+   Respects reduced-motion (frozen in the media query at the end). */
+.ambient {
+  position: absolute; inset: 0;
+  overflow: hidden;
+  pointer-events: none; z-index: 0;
+  contain: strict;
+}
+.ambient__blob {
+  position: absolute; border-radius: 50%;
+  will-change: transform;
+}
+.ambient__blob--1 {
+  width: 46vmax; height: 46vmax; top: -12%; inset-inline-start: -8%;
+  background: radial-gradient(circle, color-mix(in oklab, var(--brand) 42%, transparent), transparent 70%);
+  animation: drift1 26s var(--ease) infinite alternate;
+}
+.ambient__blob--2 {
+  width: 38vmax; height: 38vmax; bottom: -18%; inset-inline-end: -6%;
+  background: radial-gradient(circle, color-mix(in oklab, var(--accent) 32%, transparent), transparent 70%);
+  animation: drift2 32s var(--ease) infinite alternate;
+}
+.ambient__blob--3 {
+  width: 30vmax; height: 30vmax; top: 34%; inset-inline-start: 46%;
+  background: radial-gradient(circle, color-mix(in oklab, #2b6d64 30%, transparent), transparent 70%);
+  animation: drift3 38s var(--ease) infinite alternate;
+}
+@keyframes drift1 { from { transform: translate3d(0,0,0) scale(1); } to { transform: translate3d(6%,4%,0) scale(1.12); } }
+@keyframes drift2 { from { transform: translate3d(0,0,0) scale(1.05); } to { transform: translate3d(-7%,-5%,0) scale(.94); } }
+@keyframes drift3 { from { transform: translate3d(0,0,0) scale(.95); } to { transform: translate3d(5%,-6%,0) scale(1.1); } }
+
+/* ---------- micro-interactions ---------- */
+.btn:active { transform: translateY(0) scale(.985); }
+.nav__link { transition: color .18s var(--ease), opacity .18s var(--ease); }
+.pill { transition: transform .2s var(--ease), border-color .2s var(--ease), color .2s var(--ease), background .2s var(--ease); }
+.pill:hover { transform: translateY(-2px); }
+.audience__col, .email-panel { transition: transform .24s var(--ease), box-shadow .24s var(--ease), border-color .24s var(--ease); }
+.audience__col:hover, .email-panel:hover { transform: translateY(-2px); box-shadow: var(--sh-md); border-color: color-mix(in oklab, var(--brand) 26%, var(--line)); }
+.email-panel a { transition: color .18s var(--ease); }
+.email-panel a:hover { color: var(--accent); }
+.trust__item { transition: background .25s var(--ease), border-color .25s var(--ease); }
+.trust__item:hover { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.28); }
+
+/* gradient sweep on the accent CTA */
+.btn--accent { position: relative; overflow: hidden; }
+.btn--accent::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(110deg, transparent 20%, rgba(255,255,255,.22) 50%, transparent 80%);
+  transform: translateX(-120%);
+  transition: transform .7s var(--ease);
+}
+.btn--accent:hover::after { transform: translateX(120%); }
+
+/* underline grows from the inline start, in both directions */
+.foot__list a, .foot__bar a { position: relative; }
+.foot__list a::after, .foot__bar a::after {
+  content: ""; position: absolute; inset-inline: 0; bottom: -2px; height: 1px;
+  background: currentColor; transform: scaleX(0); transform-origin: inline-start;
+  transition: transform .25s var(--ease);
+}
+.foot__list a:hover::after, .foot__bar a:hover::after { transform: scaleX(1); }
+
 /* ---------- scroll reveal ---------- */
 .rv { opacity: 0; transform: translateY(14px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
 .rv[data-in="true"] { opacity: 1; transform: none; }
@@ -282,6 +447,9 @@ body > * { position: relative; z-index: 1; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
   .rv { opacity: 1; transform: none; }
+  /* freeze the ambient drift entirely, not just speed it up */
+  .ambient__blob { animation: none !important; }
+  .btn--accent::after { display: none; }
 }
 
 /* ---------- responsive ---------- */

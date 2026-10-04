@@ -4,6 +4,50 @@
 (() => {
   'use strict';
 
+  /* ---------- theme toggle ----------
+     The initial value is set by a tiny inline script in <head> so the
+     page never flashes the wrong theme. This only handles the toggle. */
+  const root = document.documentElement;
+  const THEME_KEY = 'mz-theme';
+
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+  const resolveTheme = () => {
+    let stored = null;
+    try { stored = localStorage.getItem(THEME_KEY); } catch { /* storage blocked */ }
+    if (stored === 'dark' || stored === 'light') return stored;
+    return prefersDark.matches ? 'dark' : 'light';
+  };
+
+  const applyTheme = (theme) => {
+    root.setAttribute('data-theme', theme);
+    root.style.colorScheme = theme;
+    document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
+      btn.setAttribute('aria-pressed', String(theme === 'dark'));
+      btn.setAttribute(
+        'aria-label',
+        theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
+      );
+    });
+  };
+
+  applyTheme(resolveTheme());
+
+  document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      try { localStorage.setItem(THEME_KEY, next); } catch { /* ignore */ }
+    });
+  });
+
+  // Follow the OS if the visitor has not made an explicit choice
+  prefersDark.addEventListener('change', (e) => {
+    let stored = null;
+    try { stored = localStorage.getItem(THEME_KEY); } catch { /* ignore */ }
+    if (!stored) applyTheme(e.matches ? 'dark' : 'light');
+  });
+
   /* ---------- mobile nav drawer ---------- */
   const drawer = document.getElementById('drawer');
   if (drawer) {

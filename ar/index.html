@@ -2,6 +2,14 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
+<script>
+/* Set theme before first paint to avoid a flash. Kept inline and tiny on
+   purpose: an external file would load too late to help. */
+(function(){try{var k='mz-theme',s=localStorage.getItem(k);
+var t=(s==='dark'||s==='light')?s:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+document.documentElement.setAttribute('data-theme',t);
+document.documentElement.style.colorScheme=t;}catch(e){}})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>مازايا | القوى العاملة والتوظيف في المملكة العربية السعودية</title>
 <meta name="description" content="مازايا توفر القوى العاملة التعاقدية، وتوظيف الكوادر، وإجراءات التأشيرات والإقامات والرواتب والإشراف على الفرق للشركات في المملكة العربية السعودية.">
@@ -26,7 +34,9 @@
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all';this.onload=null">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap"></noscript>
 <link rel="stylesheet" href="/assets/css/styles.css">
 <script type="application/ld+json">
 {
@@ -60,7 +70,7 @@
       </ul>
     </nav>
     <div class="head-actions">
-      <a class="lang" href="/" hreflang="en" lang="en">English</a>
+      <button class="theme-btn" type="button" data-theme-toggle aria-pressed="false" aria-label="Toggle dark mode"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button><a class="lang" href="/" hreflang="en" lang="en">English</a>
       <a class="btn head-cta" href="#contact">تواصل معنا</a>
       <button class="burger" data-burger aria-expanded="false" aria-controls="drawer" aria-label="فتح القائمة">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -87,16 +97,16 @@
   </div>
 </div>
 
-<main id="main">
+<main id="main"><div class="ambient" aria-hidden="true"><span class="ambient__blob ambient__blob--1"></span><span class="ambient__blob ambient__blob--2"></span><span class="ambient__blob ambient__blob--3"></span></div>
 <section class="hero">
     <div class="wrap hero__grid">
-      <div>
+      <div class="hero__copy">
         <span class="eyebrow">القوى العاملة والتوظيف · المملكة العربية السعودية</span>
         <h1>عمالة <em>بدون</em> أوراق.</h1>
         <p class="hero__sub">توفر مازايا القوى العاملة التعاقدية، وتوظف الكوادر، وتدير التأشيرات والإقامات والرواتب والإشراف خلف ذلك — فيبقى مشروعك مستمرًا حتى عندما تتعقّد الإجراءات النظامية.</p>
         <div class="btns">
           <a class="btn btn--accent btn--lg" href="mailto:info@maazaia.com?subject=Manpower%20enquiry">اطلب القوى العاملة</a>
-          <a class="btn btn--ghost btn--lg" href="#contact">أرسل سيرتك الذاتية</a>
+          <a class="btn btn--ondark btn--lg" href="#contact">أرسل سيرتك الذاتية</a>
         </div>
         <ul class="trust">
           <li class="trust__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>الحرف والفني والصناعي</li>
@@ -278,6 +288,8 @@
         <a href="/privacy">الخصوصية</a>
         <a href="/cookies">ملفات تعريف الارتباط</a>
         <a href="/terms">الشروط</a>
+        <a href="/ar/cookies" hreflang="ar" lang="ar">ملفات تعريف الارتباط (ع)</a>
+        <a href="/ar/privacy" hreflang="ar" lang="ar">الخصوصية (ع)</a>
       </nav>
     </div>
   </div>

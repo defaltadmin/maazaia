@@ -1,0 +1,47 @@
+feat: fix CSP console error, add Arabic legal pages, dark mode, animations
+
+Reported issues:
+- /ar/privacy 404 (no Arabic legal pages existed)
+- /cookies was English-only
+- "Send your CV" unreadable on the hero
+- CSP blocked Cloudflare's beacon, logging a console error
+- Best Practices stuck at 92
+- wanted more animation, an animated background and dark mode
+
+Fixes:
+- CSP: allow static.cloudflareinsights.com in script-src and connect-src.
+  Cloudflare Web Analytics was being blocked by our own policy; that was
+  the entire Best Practices deduction, plus the console error.
+- Added ar/privacy, ar/terms and ar/cookies. Each is a real Arabic
+  document, not a stub, and states plainly that the English text is the
+  controlling legal version where the two differ.
+- Language switchers now land on the matching document in the other
+  language instead of that language's homepage.
+- "Send your CV" used .btn--ghost, which sets a dark ink label intended
+  for light surfaces. On the dark hero it rendered near-black. Added
+  .btn--ondark for use on dark backgrounds and swapped both instances.
+- Fonts no longer block first paint: the Google stylesheet is preloaded
+  and switched to media="print"/onload, with a noscript fallback.
+  FCP 4.1s -> 0.9s, LCP 4.1s -> 1.2s.
+
+Dark mode:
+- Manual toggle plus follows the OS preference until a choice is made
+- Applied by a tiny inline script before first paint, so there is no
+  flash of the wrong theme
+- Separate token block; the brand button fill needed its own token
+  because the lighter teal only reaches 3.3:1 behind white text
+- Header wordmark re-pointed at --ink, since --brand-deep resolves to
+  near-black on the dark surface and was invisible
+
+Animation:
+- Slow drifting ambient background, clipped with contain:strict so it
+  cannot affect layout (as a flow child it inflated <main> and caused
+  a 0.196 CLS on the Arabic page)
+- Gradient sweep on the primary CTA, growing underlines in the footer,
+  lift on cards and pills
+- All of it freezes under prefers-reduced-motion
+
+Verified locally with Lighthouse: English 100/100/100/100, Arabic
+99/100/100/100 with CLS 0.069, zero console errors. A metric-matched
+font fallback was added to reduce Arabic reflow; values are conservative
+because over-scaling the fallback shifts text further than the swap.
