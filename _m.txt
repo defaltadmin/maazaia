@@ -1,0 +1,9 @@
+fix: move CSP comment out of the _headers rule block
+
+The previous commit added a /* ... */ comment inside the /* ... */ header
+block in _headers. Cloudflare Pages only supports # comments; anything
+else inside a rule block makes the deployment fail to build, which is
+why the Arabic legal pages never went live.
+
+The CSP itself is unchanged and still allows static.cloudflareinsights.com
+so Cloudflare Web Analytics stops being blocked.
