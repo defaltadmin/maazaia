@@ -1,18 +1,10 @@
-fix: satisfy script-src CSP — no inline scripts or onload handlers
+fix: repair font <link> href broken by a bad regex substitution
 
-Lighthouse against production reported two CSP violations that the local
-server could not catch, because it sends no Content-Security-Policy:
+The previous pass built the replacement string with str.format(), which
+does not expand regex backreferences. The literal text \1 was written into
+every page as the stylesheet href, so the browser requested
+https://maazaia.com/1 three times and refused it as an unsupported MIME
+type. That was the remaining Best Practices deduction (96, not 100).
 
-- the inline no-flash theme script was blocked by script-src
-- the font stylesheet's onload="this.media='all'" handler was blocked
-
-Best Practices was sitting at 92 as a result.
-
-Both are now CSP-clean without weakening the policy:
-
-- the theme script moved into assets/js/main.js, which is already loaded
-  synchronously in <head>, so it still runs before first paint
-- the font link keeps media="print" but is switched to media="all" by an
-  addEventListener in main.js instead of an inline attribute
-
-script-src is unchanged and still has no 'unsafe-inline'.
+All nine pages now carry the real fonts.googleapis.com URL in the
+preload, the async stylesheet link and the noscript fallback.
