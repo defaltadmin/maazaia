@@ -35,6 +35,11 @@
   --sh-lg: 0 18px 48px rgba(8,28,26,.10), 0 4px 12px rgba(8,28,26,.06);
   --ease: cubic-bezier(.22,.61,.36,1);
   --wrap: 1160px;
+  /* Glassmorphism */
+  --glass: rgba(255,255,255,0.72);
+  --glass-blur: 18px;
+  --glass-border: rgba(255,255,255,0.25);
+  --glass-border-hover: rgba(255,255,255,0.4);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -68,10 +73,10 @@ body > * { position: relative; z-index: 1; }
 
 .site-head {
   position: sticky; top: 0; z-index: 50;
-  background: color-mix(in oklab, var(--paper) 86%, transparent);
-  backdrop-filter: saturate(180%) blur(14px);
-  -webkit-backdrop-filter: saturate(180%) blur(14px);
-  border-bottom: 1px solid var(--line);
+  background: color-mix(in oklab, var(--paper) 80%, transparent);
+  backdrop-filter: saturate(180%) blur(var(--glass-blur));
+  -webkit-backdrop-filter: saturate(180%) blur(var(--glass-blur));
+  border-bottom: 1px solid var(--glass-border);
 }
 .site-head__in { min-height: 74px; display: flex; align-items: center; gap: 1.6rem; }
 .site-head.is-stuck { box-shadow: 0 1px 0 var(--line), 0 10px 30px rgba(16,22,26,.05); }
@@ -125,6 +130,22 @@ body > * { position: relative; z-index: 1; }
 .btn--ghost:hover { background: var(--surface); border-color: var(--muted); }
 .btn--lg { padding: .85rem 1.5rem; font-size: 1rem; }
 .i { width: 1.05em; height: 1.05em; flex: none; }
+/* ---------- Glass Card ---------- */
+.glass-card {
+  background: var(--glass);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-md);
+  box-shadow: var(--sh-md);
+  transition: transform .24s var(--ease), border-color .24s var(--ease), box-shadow .24s var(--ease);
+}
+.glass-card:hover {
+  border-color: var(--glass-border-hover);
+  transform: translateY(-3px);
+  box-shadow: var(--sh-lg);
+}
+
 /* ---------- sections ---------- */
 main { position: relative; }
 /* Sections sit above the ambient layer. */
@@ -209,11 +230,12 @@ main > section { position: relative; z-index: 1; }
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(258px, 1fr)); gap: 1.1rem; }
 .card {
   position: relative; padding: clamp(1.6rem, 1.2rem + 1vw, 2.1rem);
-  background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-md);
+  background: var(--glass); backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border); border-radius: var(--r-md);
   box-shadow: var(--sh-sm);
-  transition: transform .24s var(--ease), box-shadow .24s var(--ease), border-color .24s var(--ease);
+  transition: transform .24s var(--ease), border-color .24s var(--ease), box-shadow .24s var(--ease);
 }
-.card:hover { transform: translateY(-3px); box-shadow: var(--sh-md); border-color: color-mix(in oklab, var(--brand) 26%, var(--line)); }
+.card:hover { transform: translateY(-3px); border-color: var(--glass-border-hover); box-shadow: var(--sh-lg); }
 .card__n { display: inline-block; margin-bottom: .9rem; font-family: var(--serif); font-size: .95rem; font-weight: 500; color: var(--accent); letter-spacing: .06em; }
 .card h3 { margin-bottom: .5rem; }
 .card p { color: var(--muted); font-size: .96rem; margin-bottom: 0; }
@@ -244,7 +266,8 @@ main > section { position: relative; z-index: 1; }
 .contact-wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 1.4rem + 3vw, 4rem); align-items: start; }
 .email-panel {
   padding: clamp(1.8rem, 1.4rem + 1.4vw, 2.6rem);
-  background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-md);
+  background: var(--glass); backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border); border-radius: var(--r-md);
   box-shadow: var(--sh-sm);
 }
 .email-panel__label { display: block; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: .7rem; }
