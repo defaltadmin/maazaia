@@ -270,6 +270,19 @@ main > section { position: relative; z-index: 1; }
 .foot__bar a { color: var(--on-dark-soft); text-decoration: none; }
 .foot__bar a:hover { color: var(--accent-lift); }
 
+/* Credit line — deliberately the quietest thing in the footer. */
+.foot__credit {
+  margin-top: 1.15rem;
+  padding-top: 1.15rem;
+  border-top: 1px solid var(--on-dark-line);
+  font-size: .78rem;
+  color: var(--on-dark-soft);
+  opacity: .8;
+}
+.foot__credit a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: color .18s var(--ease), border-color .18s var(--ease); }
+.foot__credit a:hover { color: var(--accent-lift); border-bottom-color: currentColor; }
+.foot__credit a:focus-visible { outline: 2px solid var(--accent-lift); outline-offset: 3px; border-radius: 2px; }
+
 /* ---------- mobile drawer ---------- */
 .drawer { display: none; }
 .drawer__top { display: flex; align-items: center; justify-content: space-between; min-height: 74px; border-bottom: 1px solid var(--line); }
