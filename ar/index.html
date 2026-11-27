@@ -2,9 +2,9 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<link rel="preload" as="script" href="/assets/js/theme.js">
 <script src="/assets/js/theme.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
 <title>مازايا | القوى العاملة والتوظيف في المملكة العربية السعودية</title>
 <meta name="description" content="مازايا توفر القوى العاملة التعاقدية، وتوظيف الكوادر، وإجراءات التأشيرات والإقامات والرواتب والإشراف على الفرق للشركات في المملكة العربية السعودية.">
 <link rel="canonical" href="https://maazaia.com/ar/">
@@ -12,7 +12,8 @@
 <link rel="alternate" hreflang="ar" href="https://maazaia.com/ar/">
 <link rel="alternate" hreflang="x-default" href="https://maazaia.com/">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-<meta name="theme-color" content="#0d2f2b">
+<meta name="theme-color" content="#f8f9f8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d1413" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="مازايا">
 <meta property="og:locale" content="ar_SA">
@@ -21,40 +22,84 @@
 <meta property="og:title" content="مازايا | القوى العاملة والتوظيف في المملكة العربية السعودية">
 <meta property="og:description" content="القوى العاملة التعاقدية، وتوظيف الكوادر، وأعمال الامتثال التي تدعم ذلك.">
 <meta property="og:image" content="https://maazaia.com/assets/img/og-image.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="538">
+<meta property="og:image:alt" content="مازايا: القوى العاملة والتوظيف للشركات في المملكة العربية السعودية">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.svg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap">
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" media="print" data-async-font>
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap"></noscript>
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap"></noscript>
+<meta name="twitter:title" content="مازايا | القوى العاملة والتوظيف في المملكة العربية السعودية">
+<meta name="twitter:description" content="القوى العاملة التعاقدية، وتوظيف الكوادر، وأعمال الامتثال التي تدعم ذلك.">
+<meta name="twitter:image" content="https://maazaia.com/assets/img/og-image.png">
+<meta name="twitter:image:alt" content="مازايا: القوى العاملة والتوظيف للشركات في المملكة العربية السعودية">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/img/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="/assets/img/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/plex-arabic-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/styles.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "EmploymentAgency",
+  "@id": "https://maazaia.com/#organization",
   "name": "مازايا",
   "alternateName": "Maazaia",
   "url": "https://maazaia.com/ar/",
-  "description": "مازايا توفر القوى العاملة التعاقدية، وتوظيف الكوادر، وإجراءات التأشيرات والإقامات والرواتب للشركات في المملكة العربية السعودية.",
-  "email": "info@maazaia.com",
-  "areaServed": { "@type": "Country", "name": "Saudi Arabia" },
-  "knowsLanguage": ["ar", "en"]
+  "logo": "https://maazaia.com/assets/img/logo-mark.jpg",
+  "image": "https://maazaia.com/assets/img/og-image.png",
+  "description": "مازايا توفر القوى العاملة التعاقدية، وتوظيف الكوادر، وإجراءات التأشيرات والإقامات والرواتب والإشراف على الفرق للشركات في المملكة العربية السعودية.",
+  "areaServed": {
+    "@type": "Country",
+    "name": "المملكة العربية السعودية"
+  },
+  "knowsLanguage": [
+    "ar",
+    "en"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "خدمات القوى العاملة",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "توفير القوى العاملة التعاقدية"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "التوظيف الدائم"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "إجراءات التأشيرات والإقامات"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "إدارة الرواتب والإشراف الميداني"
+        }
+      }
+    ]
+  }
 }
 </script>
 </head>
 <body>
-<a class="skip" href="#main">تخطَّ إلى المحتوى</a>
+<a class="skip" href="#main">انتقل إلى المحتوى</a>
 
 <header class="site-head">
   <div class="wrap site-head__in">
-    <a class="brand" href="/ar/" aria-label="مازايا — الرئيسية">
-      <img class="brand__mark" src="/assets/img/logo-placeholder.svg" alt="" width="34" height="34">
+    <a class="brand" href="/ar/" aria-label="مازايا، الرئيسية">
+      <img class="brand__mark" src="/assets/img/logo-mark.jpg" alt="" width="34" height="34">
       <span>مازايا</span>
     </a>
     <nav class="nav" aria-label="القائمة الرئيسية">
@@ -66,244 +111,239 @@
       </ul>
     </nav>
     <div class="head-actions">
-      <button class="theme-btn" type="button" data-theme-toggle aria-pressed="false" aria-label="Toggle dark mode"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button><a class="lang" href="/" hreflang="en" lang="en">English</a>
+      <button class="theme-btn" type="button" data-theme-toggle aria-pressed="false" aria-label="الوضع الداكن"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+      <a class="lang" href="/" lang="en" hreflang="en">English</a>
       <a class="btn head-cta" href="#contact">تواصل معنا</a>
-      <button class="burger" data-burger aria-expanded="false" aria-controls="drawer" aria-label="فتح القائمة">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      </button>
+      <button class="burger" type="button" data-burger aria-expanded="false" aria-controls="drawer" aria-label="فتح القائمة"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </div>
   </div>
 </header>
 
-<div class="drawer" id="drawer" data-open="false">
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="القائمة" data-open="false">
   <div class="wrap">
     <div class="drawer__top">
-      <a class="brand" href="/ar/" data-drawer-close><img class="brand__mark" src="/assets/img/logo-placeholder.svg" alt="" width="34" height="34"><span>مازايا</span></a>
-      <button class="burger" data-burger aria-label="إغلاق القائمة" style="display:block">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-      </button>
+      <a class="brand" href="/ar/"><img class="brand__mark" src="/assets/img/logo-mark.jpg" alt="" width="34" height="34"><span>مازايا</span></a>
+      <button class="burger" type="button" data-drawer-close-btn aria-label="إغلاق القائمة"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </div>
     <nav class="drawer__list" aria-label="قائمة الجوال">
       <a href="#services" data-drawer-close>الخدمات</a>
       <a href="#sectors" data-drawer-close>القطاعات</a>
       <a href="#how" data-drawer-close>كيف نعمل</a>
       <a href="#contact" data-drawer-close>تواصل معنا</a>
-      <a href="/" lang="en" data-drawer-close>English</a>
     </nav>
   </div>
 </div>
 
-<main id="main"><div class="ambient" aria-hidden="true"><span class="ambient__blob ambient__blob--1"></span><span class="ambient__blob ambient__blob--2"></span><span class="ambient__blob ambient__blob--3"></span></div>
-<section class="hero">
+<main id="main">
+  <section class="hero">
     <div class="wrap hero__grid">
       <div class="hero__copy">
-        <span class="eyebrow">القوى العاملة والتوظيف · المملكة العربية السعودية</span>
-        <h1>عمالة <em>بدون</em> أوراق.</h1>
-        <p class="hero__sub">توفر مازايا القوى العاملة التعاقدية، وتوظف الكوادر، وتدير التأشيرات والإقامات والرواتب والإشراف خلف ذلك — فيبقى مشروعك مستمرًا حتى عندما تتعقّد الإجراءات النظامية.</p>
+        <h1>قوى عاملة دون تعقيدات إجرائية.</h1>
+        <p class="hero__sub">توفر مازايا القوى العاملة التعاقدية، وتوظّف الكوادر الدائمة، وتتولى ما يرتبط بها من تأشيرات ورواتب وإشراف للشركات في مختلف أنحاء المملكة.</p>
         <div class="btns">
-          <a class="btn btn--accent btn--lg" href="mailto:info@maazaia.com?subject=Manpower%20enquiry">اطلب القوى العاملة</a>
-          <a class="btn btn--ondark btn--lg" href="#contact">أرسل سيرتك الذاتية</a>
+          <a class="btn btn--accent btn--lg" href="#contact">اطلب القوى العاملة</a>
+          <a class="btn btn--ondark btn--lg" href="#services">استعرض الخدمات</a>
         </div>
         <ul class="trust">
-          <li class="trust__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>الحرف والفني والصناعي</li>
-          <li class="trust__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>التأشيرات والإقامات داخليًا</li>
-          <li class="trust__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>لا رسوم على الباحثين عن عمل</li>
+          <li class="trust__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>مهن حرفية وفنية وصناعية</li>
+          <li class="trust__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>التأشيرات والإقامات تُنجز داخليًا</li>
+          <li class="trust__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>أسعار استرشادية دون التزام</li>
         </ul>
       </div>
-      <div>
-        <blockquote class="hero__quote">
-          أرسل لنا نطاق العمل. الاستقطاب والأوراق والرواتب والأشخاص في الموقع تعود إلينا جميعًا.
-          <cite>كيف يسير العمل مع مازايا</cite>
-        </blockquote>
+      <aside class="brief" aria-labelledby="brief-title">
+        <h2 class="brief__title" id="brief-title">يبدأ الطلب بأربع معلومات</h2>
+        <dl>
+          <div class="brief__row"><dt>المهن</dt><dd>مثل الكهرباء والتكييف والمستودعات والضيافة.</dd></div>
+          <div class="brief__row"><dt>العدد</dt><dd>عدد العاملين الذين تحتاجهم.</dd></div>
+          <div class="brief__row"><dt>الموقع</dt><dd>الموقع أو المدينة داخل المملكة.</dd></div>
+          <div class="brief__row"><dt>تاريخ البدء</dt><dd>موعد مباشرة الفريق في الموقع.</dd></div>
+        </dl>
+        <p class="brief__foot">نرد عليك بالتوفر والأسعار الاسترشادية.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" id="services" aria-labelledby="services-h">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="services-h">الخدمات</h2>
+        <p class="lead">اختر خدمة واحدة أو الخدمات الأربع. تبدأ معظم التعاقدات بتوفير القوى العاملة، ثم يُضاف دعم الامتثال النظامي فور مباشرة أول فريق في الموقع.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <h3>القوى العاملة التعاقدية</h3>
+          <p>فرق حرفية وفنية وصناعية بنظام التعاقد، يتولى فريقنا تجهيزها وتشغيلها والإشراف عليها.</p>
+          <ul class="card__list">
+            <li>الحرف والتكييف والكهرباء والميكانيكا</li>
+            <li>الفرق الصناعية وفرق المستودعات</li>
+            <li>الضيافة وإدارة المرافق</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>التوظيف الدائم</h3>
+          <p>استقطاب كوادر محلية ودولية للوظائف الدائمة، بما يشمل الكفاءات المؤهلة لمتطلبات التوطين.</p>
+          <ul class="card__list">
+            <li>استقطاب الكفاءات المحلية</li>
+            <li>حملات التوظيف الخارجي</li>
+            <li>التفاوض على العروض وإجراءات المباشرة</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>إجراءات التأشيرات والإقامات</h3>
+          <p>إنجاز رخص العمل والتأشيرات والإقامات من البداية إلى النهاية عبر فريقنا المختص.</p>
+          <ul class="card__list">
+            <li>رخص العمل وإصدار التأشيرات</li>
+            <li>إصدار الإقامات وتجديدها</li>
+            <li>التسجيل لدى وزارة الموارد البشرية والتنمية الاجتماعية والمؤسسة العامة للتأمينات الاجتماعية</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>الرواتب والإشراف الميداني</h3>
+          <p>صرف الرواتب وفق دورة شهرية ثابتة، مع مشرفين ميدانيين يرفعون تقارير الأداء والإنتاجية.</p>
+          <ul class="card__list">
+            <li>معالجة مسيرات الرواتب</li>
+            <li>التأمينات الاجتماعية ومستحقات نهاية الخدمة</li>
+            <li>مشرفون في الموقع وتقارير دورية</li>
+          </ul>
+        </article>
       </div>
     </div>
   </section>
 
-  <section class="section" id="services">
+  <section class="section band--ink" id="sectors" aria-labelledby="sectors-h">
     <div class="wrap">
       <div class="head">
-        <span class="eyebrow">ما نقدمه</span>
-        <h2>أربع خدمات وجهة تواصل واحدة.</h2>
-        <p class="lead">اختر خدمة واحدة أو جميعها. تبدأ معظم الأعمال مع توفير القوى العاملة، ثم يُضاف الدعم النظامي بعد وصول أول فريق.</p>
-      </div>
-      <div class="cards">
-        <article class="card rv">
-          <span class="card__n">01</span>
-          <h3>القوى العاملة التعاقدية</h3>
-          <p>فرق من الحرف والفنيين والصناعة على أساس تعاقدي، يتم تشغيلها وإشرافها من فريقنا.</p>
-          <ul class="card__list">
-            <li>الحرف والتكييف والكهرباء والميكانيكا</li>
-            <li>الفرق الصناعية والمستودعات</li>
-            <li>الضيافة وإدارة المرافق</li>
-          </ul>
-        </article>
-        <article class="card rv" data-delay="80">
-          <span class="card__n">02</span>
-          <h3>التوظيف</h3>
-          <p>توظيف كوادر محلية ودولية للوظائف التي تحتاجها بشكل دائم.</p>
-          <ul class="card__list">
-            <li>استقطاب المرشحين المحليين</li>
-            <li>حملات توظيف دولية</li>
-            <li>التفاوض على العروض والانضمام</li>
-          </ul>
-        </article>
-        <article class="card rv" data-delay="160">
-          <span class="card__n">03</span>
-          <h3>التأشيرات والإقامات</h3>
-          <p>إنجاز الإجراءات الحكومية من البداية إلى النهاية، فلا يعتمد جدولك على انتظار غيرك.</p>
-          <ul class="card__list">
-            <li>تصاريح العمل والتأشيرات</li>
-            <li>إصدار وتجديد الإقامات</li>
-            <li>تسجيلات وزارة الموارد البشرية والتأمينات</li>
-          </ul>
-        </article>
-        <article class="card rv" data-delay="240">
-          <span class="card__n">04</span>
-          <h3>الرواتب والإشراف</h3>
-          <p>رواتب دقيقة وإشراف ميداني، ليكون الإنتاج مسؤولية أحد لا آمال الجميع.</p>
-          <ul class="card__list">
-            <li>معالجة الرواتب</li>
-            <li>التأمينات ونهاية الخدمة</li>
-            <li>مشرفون ميدانيون وتقارير</li>
-          </ul>
-        </article>
-      </div>
-    </div>
-  </section>
-<section class="section band--ink" id="sectors">
-    <div class="wrap">
-      <div class="head">
-        <span class="eyebrow">القطاعات</span>
-        <h2>القطاعات التي نعمل فيها.</h2>
-        <p class="lead">معظم أعمالنا في هذه القطاعات. إن لم يكن قطاعك مذكورًا، اسألنا — المسار النظامي غالبًا متشابه.</p>
+        <h2 id="sectors-h">القطاعات التي نخدمها</h2>
+        <p class="lead">تتركز معظم أعمالنا في هذه القطاعات. وإن لم يكن قطاعك ضمنها فتواصل معنا؛ فالمسار النظامي غالبًا متقارب.</p>
       </div>
       <ul class="sectors">
-        <li class="pill rv">المقاولات والتشطيبات</li>
-        <li class="pill rv" data-delay="60">إدارة المرافق</li>
-        <li class="pill rv" data-delay="120">الضيافة</li>
-        <li class="pill rv" data-delay="60">الصناعة والتصنيع</li>
-        <li class="pill rv" data-delay="120">التخزين واللوجستيات</li>
-        <li class="pill rv">خدمات الأمن</li>
-        <li class="pill rv" data-delay="60">التدبير المنزلي والتنظيف</li>
-        <li class="pill rv" data-delay="120">الصيانة الفنية</li>
+        <li>المقاولات والتشطيبات</li>
+        <li>إدارة المرافق</li>
+        <li>الضيافة</li>
+        <li>الصناعة والتصنيع</li>
+        <li>التخزين واللوجستيات</li>
+        <li>الخدمات الأمنية</li>
+        <li>النظافة والخدمات المساندة</li>
+        <li>الصيانة الفنية</li>
       </ul>
     </div>
   </section>
 
-  <section class="section" id="how">
+  <section class="section" id="how" aria-labelledby="how-h">
     <div class="wrap">
       <div class="head">
-        <span class="eyebrow">كيف نعمل</span>
-        <h2>من أول رسالة إلى بدء العمل.</h2>
+        <h2 id="how-h">من الطلب إلى مباشرة الفريق في الموقع</h2>
       </div>
       <div class="process">
-        <div class="step rv">
+        <div class="step">
           <span class="step__n">الخطوة 01</span>
           <h3>أرسل نطاق العمل</h3>
-          <p>المهارات والعدد والموقع وتاريخ البدء. رسالة قصيرة تكفي للبدء.</p>
+          <p>المهن والعدد والموقع وتاريخ البدء. رسالة موجزة تكفي للانطلاق.</p>
         </div>
-        <div class="step rv" data-delay="80">
+        <div class="step">
           <span class="step__n">الخطوة 02</span>
-          <h3>عرض سعر</h3>
-          <p>التوفر والأسعار الاسترشادية، دون أي التزام.</p>
+          <h3>استلم عرضًا مسعّرًا</h3>
+          <p>التوفر والأسعار الاسترشادية لنطاق عملك.</p>
         </div>
-        <div class="step rv" data-delay="160">
+        <div class="step">
           <span class="step__n">الخطوة 03</span>
-          <h3>نُكمل الإجراءات</h3>
-          <p>التأشيرات والتصاريح والنقل والسكن يتولاها فريقنا بالكامل.</p>
+          <h3>نتولى التجهيز والمباشرة</h3>
+          <p>التأشيرات والتصاريح والنقل والسكن يديرها فريقنا بالكامل.</p>
         </div>
-        <div class="step rv" data-delay="240">
+        <div class="step">
           <span class="step__n">الخطوة 04</span>
           <h3>الإشراف والرواتب</h3>
-          <p>الفرق ترفع تقاريرها لمشرفينا، والرواتب تُصرف وفق دورة شهرية ثابتة.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-<section class="section band" id="contact">
-    <div class="wrap contact-wrap">
-      <div class="rv">
-        <span class="eyebrow">تواصل معنا</span>
-        <h2>تواصل معنا.</h2>
-        <p class="lead">سواء كنت تحتاج فريقًا الشهر القادم أو موظفًا دائمًا في الربع القادم، فالخطوة الأولى واحدة: أرسل نطاق العمل عبر البريد.</p>
-        <div class="email-panel" style="margin-top:2rem">
-          <span class="email-panel__label">البريد الإلكتروني</span>
-          <a href="mailto:info@maazaia.com" dir="ltr">info@maazaia.com</a>
-          <p>اكتب في عنوان الرسالة ما إذا كان طلبًا لقوى العاملة أو وصفًا وظيفيًا أو سيرة ذاتية، ليصل إلى الجهة المناسبة مباشرة.</p>
-        </div>
-      </div>
-      <div class="audience rv" data-delay="120">
-        <div class="audience__col">
-          <span class="eyebrow">للشركات</span>
-          <h3>تحتاج عمالة؟</h3>
-          <p>أرسل المهارات والعدد وتاريخ البدء، وستصلك التوفر والأسعار الاسترشادية دون أي التزام.</p>
-          <a class="btn btn--accent" style="margin-top:1.4rem" href="mailto:info@maazaia.com?subject=Manpower%20enquiry">اطلب القوى العاملة</a>
-        </div>
-        <div class="audience__col">
-          <span class="eyebrow">للباحثين عن عمل</span>
-          <h3>تبحث عن عمل؟</h3>
-          <p>أرسل سيرتك الذاتية مرة واحدة، ونطابقها مع الوظائف المتاحة لدى عملائنا في المملكة. لا نفرض أي رسوم على الباحثين.</p>
-          <a class="btn btn--ghost" style="margin-top:1.4rem" href="mailto:info@maazaia.com?subject=CV%20submission">أرسل سيرتك الذاتية</a>
+          <p>تعمل الفرق بإشراف مشرفينا، وتُصرف الرواتب وفق دورة شهرية منتظمة.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <section class="section band" id="contact" aria-labelledby="contact-h">
+    <div class="wrap contact-wrap">
+      <div>
+        <h2 id="contact-h">تواصل معنا</h2>
+        <p class="lead">أخبرنا بالمهن المطلوبة والعدد والموقع وتاريخ البدء، وسنرد عليك بالتوفر والأسعار.</p>
+      </div>
+      <div>
+        <form class="contact-form" action="/api/contact" method="post" data-contact-form data-turnstile-sitekey="">
+          <div class="field">
+            <label for="f-name">الاسم</label>
+            <input id="f-name" type="text" name="name" autocomplete="name" maxlength="100" required aria-describedby="e-name">
+            <p class="field-error" id="e-name" data-error-for="name"></p>
+          </div>
+          <div class="field">
+            <label for="f-email">البريد الإلكتروني</label>
+            <input id="f-email" type="email" name="email" autocomplete="email" maxlength="254" required dir="ltr" aria-describedby="e-email">
+            <p class="field-error" id="e-email" data-error-for="email"></p>
+          </div>
+          <div class="field">
+            <label for="f-subject">الموضوع</label>
+            <select id="f-subject" name="subject" required aria-describedby="e-subject">
+              <option value="Manpower request">طلب قوى عاملة</option>
+              <option value="Permanent recruitment brief">طلب توظيف دائم</option>
+              <option value="Visa, iqama or payroll support">دعم التأشيرات أو الإقامات أو الرواتب</option>
+              <option value="Other enquiry">استفسار آخر</option>
+            </select>
+            <p class="field-error" id="e-subject" data-error-for="subject"></p>
+          </div>
+          <div class="field">
+            <label for="f-message">الرسالة</label>
+            <textarea id="f-message" name="message" minlength="10" maxlength="3000" required placeholder="المهن:&#10;العدد:&#10;الموقع:&#10;تاريخ البدء:" aria-describedby="h-message e-message"></textarea>
+            <p class="hint" id="h-message">لطلب القوى العاملة، اذكر المهن المطلوبة والعدد والموقع وتاريخ البدء.</p>
+            <p class="field-error" id="e-message" data-error-for="message"></p>
+          </div>
+          <div class="hp" aria-hidden="true" inert>
+            <label>رمز مرجعي (اتركه فارغًا) <input type="text" name="ref_code" tabindex="-1" autocomplete="off"></label>
+          </div>
+          <input type="hidden" name="lang" value="ar">
+          <input type="hidden" name="ts" value="">
+          <div data-turnstile></div>
+          <button class="btn btn--accent" type="submit">إرسال الرسالة</button>
+          <p class="form-status" role="status" data-form-status></p>
+        </form>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer class="site-foot">
   <div class="wrap">
     <div class="foot__cols">
       <div class="foot__brand">
-        <a class="brand" href="/ar/" style="color:#f2f6f5">
-          <img class="brand__mark" src="/assets/img/logo-placeholder.svg" alt="" width="34" height="34">
+        <a class="brand" href="/ar/">
+          <img class="brand__mark" src="/assets/img/logo-mark.jpg" alt="" width="34" height="34">
           <span>مازايا</span>
         </a>
-        <p>حلول القوى العاملة والتوظيف للشركات في المملكة العربية السعودية: العمالة التعاقدية، والتوظيف الدائم، وأعمال الامتثال التي تدعم كليهما.</p>
+        <p>خدمات القوى العاملة والتوظيف لأصحاب العمل في المملكة العربية السعودية. عمالة تعاقدية، وتوظيف دائم، وأعمال الامتثال النظامي خلف كليهما.</p>
       </div>
       <div>
-        <h2 class="foot__h">أقسام الصفحة</h2>
+        <h2 class="foot__h">الخدمات</h2>
         <ul class="foot__list">
-          <li><a href="#services">الخدمات</a></li>
-          <li><a href="#sectors">القطاعات</a></li>
-          <li><a href="#how">كيف نعمل</a></li>
-          <li><a href="#contact">تواصل معنا</a></li>
+          <li><span>القوى العاملة التعاقدية</span></li>
+          <li><span>التوظيف الدائم</span></li>
+          <li><span>إجراءات التأشيرات والإقامات</span></li>
+          <li><span>الرواتب والإشراف الميداني</span></li>
         </ul>
       </div>
       <div>
-        <h2 class="foot__h">تواصل معنا</h2>
+        <h2 class="foot__h">تواصل</h2>
         <ul class="foot__list">
-          <li><a href="mailto:info@maazaia.com" dir="ltr">info@maazaia.com</a></li>
-          <li><a href="/" lang="en">English</a></li>
+          <li><a href="#contact">نموذج التواصل</a></li>
+          <li><a href="/" lang="en" hreflang="en">English</a></li>
         </ul>
       </div>
     </div>
     <div class="foot__bar">
       <span>© 2026 مازايا. جميع الحقوق محفوظة.</span>
       <nav aria-label="الشروط القانونية">
-        <a href="/privacy">الخصوصية</a>
-        <a href="/cookies">ملفات تعريف الارتباط</a>
-        <a href="/terms">الشروط</a>
-        <a href="/ar/cookies" hreflang="ar" lang="ar">ملفات تعريف الارتباط (ع)</a>
-        <a href="/ar/privacy" hreflang="ar" lang="ar">الخصوصية (ع)</a>
+        <a href="/ar/privacy">الخصوصية</a>
+        <a href="/ar/terms">الشروط</a>
       </nav>
     </div>
-    <p class="foot__credit">صُنع بعناية بواسطة <a href="https://mscarabia.com" rel="noopener">MSC Arabia</a></p>
+    <p class="foot__credit">تنفيذ <a href="https://mscarabia.com" rel="noopener noreferrer"><span lang="en">MSC Arabia</span></a></p>
   </div>
 </footer>
-
-<!-- إشعار ملفات تعريف الارتباط. لا يستخدم الموقع أي ملفات تتبع ولا تحليلات،
-     لذا هذا الإشعار إشعار توضيحي وليس موافقة إلزامية. -->
-<aside class="cookie" data-cookie-notice data-show="false" role="dialog" aria-live="polite" aria-label="إشعار ملفات تعريف الارتباط">
-  <p>
-    لا يستخدم هذا الموقع ملفات تعريف ارتباط للتتبع ولا أدوات تحليل. نخزّن اختيارك محليًا في متصفحك فقط. اقرأ
-    <a href="/cookies">سياسة ملفات تعريف الارتباط</a>.
-  </p>
-  <div class="cookie__actions">
-    <button class="btn" type="button" data-cookie-choice="essential">حسنًا</button>
-    <a class="btn btn--ghost" href="/cookies">اقرأ السياسة</a>
-  </div>
-</aside>
 
 <script src="/assets/js/main.js" defer></script>
 </body>

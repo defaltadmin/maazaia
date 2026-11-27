@@ -1,79 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Sitemap for maazaia.com
-     Single-page site: the landing page carries all marketing content.
-     Legal pages are listed at low priority. -->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://maazaia.com/</loc>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://maazaia.com/"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://maazaia.com/ar/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://maazaia.com/"/>
-    <lastmod>2026-10-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://maazaia.com/ar/</loc>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://maazaia.com/"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://maazaia.com/ar/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://maazaia.com/"/>
-    <lastmod>2026-10-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://maazaia.com/cookies</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://maazaia.com/cookies"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://maazaia.com/ar/cookies"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://maazaia.com/"/>
-    <lastmod>2026-10-04</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://maazaia.com/ar/cookies</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://maazaia.com/cookies"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://maazaia.com/ar/cookies"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://maazaia.com/"/>
-    <lastmod>2026-10-04</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://maazaia.com/ar/privacy</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://maazaia.com/privacy"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://maazaia.com/ar/privacy"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://maazaia.com/"/>
-    <lastmod>2026-10-04</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://maazaia.com/ar/terms</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://maazaia.com/terms"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://maazaia.com/ar/terms"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://maazaia.com/"/>
-    <lastmod>2026-10-04</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://maazaia.com/privacy</loc>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://maazaia.com/privacy"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://maazaia.com/ar/privacy"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://maazaia.com/"/>
-    <lastmod>2026-10-04</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://maazaia.com/privacy"/>
+  </url>
+  <url>
+    <loc>https://maazaia.com/ar/privacy</loc>
+    <lastmod>2026-11-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://maazaia.com/privacy"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://maazaia.com/ar/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://maazaia.com/privacy"/>
   </url>
   <url>
     <loc>https://maazaia.com/terms</loc>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://maazaia.com/terms"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://maazaia.com/ar/terms"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://maazaia.com/"/>
-    <lastmod>2026-10-04</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://maazaia.com/terms"/>
+  </url>
+  <url>
+    <loc>https://maazaia.com/ar/terms</loc>
+    <lastmod>2026-11-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://maazaia.com/terms"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://maazaia.com/ar/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://maazaia.com/terms"/>
   </url>
 </urlset>

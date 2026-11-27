@@ -20,3 +20,10 @@ dist/
 # logs
 *.log
 npm-debug.log*
+
+# Redesign artifacts (kept outside the repo)
+audits/
+audits.zip
+*audit*.md
+*.zip
+maazaia-private/
