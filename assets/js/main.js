@@ -5,6 +5,7 @@
 
   var root = document.documentElement;
   var isAr = root.lang === 'ar';
+  var reducedMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   root.classList.add('has-js');
 
   var T = isAr ? {
@@ -45,20 +46,49 @@
     try { fn(); } catch (err) { if (window.console) console.error(err); }
   }
 
-  /* ---- Theme toggle ---- */
+  /* ---- Theme toggle with controlled cross-fade ---- */
   safe(function () {
     var btn = document.querySelector('[data-theme-toggle]');
     if (!btn) return;
+    var switchTimer = null;
     function sync() {
       btn.setAttribute('aria-pressed', root.getAttribute('data-theme') === 'dark' ? 'true' : 'false');
     }
     btn.addEventListener('click', function () {
       var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      if (!reducedMotion) {
+        root.classList.add('theme-switching');
+        clearTimeout(switchTimer);
+        switchTimer = setTimeout(function () { root.classList.remove('theme-switching'); }, 300);
+      }
       root.setAttribute('data-theme', next);
       try { localStorage.setItem('mz-theme', next); } catch (e) {}
       sync();
     });
     sync();
+  });
+
+  /* ---- Sticky header elevation + subtle reading progress hairline ---- */
+  safe(function () {
+    var head = document.querySelector('.site-head');
+    if (!head) return;
+    var ticking = false;
+    function updateHeader() {
+      var y = window.scrollY || window.pageYOffset || 0;
+      head.classList.toggle('is-scrolled', y > 10);
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var ratio = max > 40 ? Math.min(1, Math.max(0, y / max)) : 0;
+      head.style.setProperty('--scroll-progress', ratio.toFixed(4));
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(updateHeader);
+      }
+    }, { passive: true });
+    window.addEventListener('resize', updateHeader, { passive: true });
+    updateHeader();
   });
 
   /* ---- Mobile menu: modal behaviour via inert, focus moved in and restored ---- */
@@ -85,6 +115,9 @@
 
     openBtn.addEventListener('click', function () { setOpen(true); });
     closeBtn.addEventListener('click', function () { setOpen(false, true); });
+    drawer.addEventListener('click', function (e) {
+      if (e.target === drawer) setOpen(false, true);
+    });
     [].forEach.call(drawer.querySelectorAll('[data-drawer-close]'), function (a) {
       a.addEventListener('click', function () { setOpen(false, false); });
     });
@@ -94,6 +127,56 @@
     if (desktop && desktop.addEventListener) {
       desktop.addEventListener('change', function (e) { if (e.matches && isOpen()) setOpen(false, false); });
     }
+  });
+
+  /* ---- Scroll-reveal observer (staggered per sibling group, works across all pages) ---- */
+  safe(function () {
+    if (reducedMotion || !('IntersectionObserver' in window)) return;
+    var groups = [
+      '.section .head',
+      '.cards .card',
+      '.sectors li',
+      '.process .step',
+      '.contact-wrap > div',
+      '.legal .toc',
+      '.legal__body > h2',
+      '.notfound .wrap > *'
+    ];
+    var seen = [];
+    groups.forEach(function (selector) {
+      var nodes = [].slice.call(document.querySelectorAll(selector));
+      nodes.forEach(function (el, idx) {
+        if (seen.indexOf(el) > -1) return;
+        seen.push(el);
+        el.setAttribute('data-reveal', '');
+        var stagger = Math.min(idx % 6, 5) * 65;
+        if (stagger > 0) el.style.setProperty('--reveal-delay', stagger + 'ms');
+      });
+    });
+    if (!seen.length) return;
+
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.setAttribute('data-reveal', 'in');
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+
+    seen.forEach(function (el) { revealObserver.observe(el); });
+  });
+
+  /* ---- Subtle pointer-tracked spotlight on service cards (fine pointers only) ---- */
+  safe(function () {
+    if (reducedMotion || !window.matchMedia || !window.matchMedia('(pointer: fine)').matches) return;
+    var cards = [].slice.call(document.querySelectorAll('.card'));
+    cards.forEach(function (card) {
+      card.addEventListener('pointermove', function (e) {
+        var rect = card.getBoundingClientRect();
+        card.style.setProperty('--mx', Math.round(e.clientX - rect.left) + 'px');
+        card.style.setProperty('--my', Math.round(e.clientY - rect.top) + 'px');
+      }, { passive: true });
+    });
   });
 
   /* ---- Current section in the nav and on-page contents ---- */
@@ -118,7 +201,7 @@
     targets.forEach(function (el) { io.observe(el); });
   });
 
-  /* ---- Contact form ---- */
+  /* ---- Contact form + interactive field focus/filled states ---- */
   safe(function () {
     var form = document.querySelector('[data-contact-form]');
     if (!form) return;
@@ -131,6 +214,28 @@
     var siteKey = form.getAttribute('data-turnstile-sitekey') || '';
     var box = form.querySelector('[data-turnstile]');
     var widgetId = null;
+
+    /* Field focus & filled state hooks + live clear-on-edit */
+    [].forEach.call(form.querySelectorAll('.field'), function (wrapper) {
+      var ctrl = wrapper.querySelector('input, select, textarea');
+      if (!ctrl) return;
+      function syncField() {
+        wrapper.classList.toggle('is-filled', !!ctrl.value.trim());
+      }
+      ctrl.addEventListener('focus', function () { wrapper.classList.add('is-focused'); });
+      ctrl.addEventListener('blur', function () {
+        wrapper.classList.remove('is-focused');
+        syncField();
+      });
+      ctrl.addEventListener('input', function () {
+        syncField();
+        if (ctrl.getAttribute('aria-invalid') === 'true' && ctrl.name) {
+          setError(ctrl.name, '');
+        }
+      });
+      ctrl.addEventListener('change', syncField);
+      syncField();
+    });
 
     function stampNow() { if (stamp) stamp.value = String(Date.now()); }
     stampNow();
@@ -206,6 +311,7 @@
         .then(function (res) {
           if (res.ok) {
             form.reset();
+            [].forEach.call(form.querySelectorAll('.field'), function (w) { w.classList.remove('is-filled', 'is-focused'); });
             stampNow();
             show(T.ok, 'ok');
             resetChallenge();

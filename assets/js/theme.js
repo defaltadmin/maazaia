@@ -10,4 +10,16 @@
     theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
   document.documentElement.setAttribute('data-theme', theme);
+
+  if (window.matchMedia) {
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    var onSchemeChange = function (e) {
+      try {
+        var stored = localStorage.getItem('mz-theme');
+        if (stored === 'dark' || stored === 'light') return;
+      } catch (err) {}
+      document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+    };
+    if (mq.addEventListener) mq.addEventListener('change', onSchemeChange);
+  }
 })();
