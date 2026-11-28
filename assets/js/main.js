@@ -164,19 +164,16 @@
     }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
 
     seen.forEach(function (el) { revealObserver.observe(el); });
-  });
 
-  /* ---- Subtle pointer-tracked spotlight on service cards (fine pointers only) ---- */
-  safe(function () {
-    if (reducedMotion || !window.matchMedia || !window.matchMedia('(pointer: fine)').matches) return;
-    var cards = [].slice.call(document.querySelectorAll('.card'));
-    cards.forEach(function (card) {
-      card.addEventListener('pointermove', function (e) {
-        var rect = card.getBoundingClientRect();
-        card.style.setProperty('--mx', Math.round(e.clientX - rect.left) + 'px');
-        card.style.setProperty('--my', Math.round(e.clientY - rect.top) + 'px');
-      }, { passive: true });
+    /* Safety net: content must never stay hidden. Reveal everything for print, and if the
+       page has not been scrolled at all after 5 seconds (screenshot tools, previews). */
+    function revealAll() { root.classList.add('reveal-all'); }
+    window.addEventListener('beforeprint', revealAll);
+    var interacted = false;
+    ['scroll', 'wheel', 'touchstart', 'keydown'].forEach(function (name) {
+      window.addEventListener(name, function () { interacted = true; }, { passive: true, once: true });
     });
+    setTimeout(function () { if (!interacted) revealAll(); }, 5000);
   });
 
   /* ---- Current section in the nav and on-page contents ---- */

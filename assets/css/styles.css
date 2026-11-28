@@ -314,19 +314,11 @@ p  { margin: 0 0 1.05em; }
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 1px 0 rgba(255, 255, 255, 0.1) inset;
   transition: background-color var(--fast) ease, border-color var(--fast) ease, transform var(--fast) var(--ease-out), box-shadow var(--mid) var(--ease-out);
 }
-.btn::before {
-  content: ""; position: absolute; inset: 0; z-index: -1;
-  background: linear-gradient(110deg, transparent 25%, rgba(255, 255, 255, 0.16) 50%, transparent 75%);
-  transform: translateX(calc(-120% * var(--dir)));
-  transition: transform 520ms var(--ease-out);
-  pointer-events: none;
-}
 .btn:hover {
   background: var(--brand-deep);
   transform: translateY(-1.5px);
   box-shadow: 0 8px 20px -8px rgba(17, 25, 24, 0.35), 0 1px 0 rgba(255, 255, 255, 0.14) inset;
 }
-.btn:hover::before { transform: translateX(calc(120% * var(--dir))); }
 .btn:active { transform: translateY(0) scale(0.985); box-shadow: 0 2px 6px -2px rgba(17, 25, 24, 0.25); }
 
 .btn--accent {
@@ -361,36 +353,14 @@ p  { margin: 0 0 1.05em; }
   padding-block: clamp(4rem, 2.6rem + 4.6vw, 6.75rem);
   border-bottom: 1px solid var(--line-soft);
 }
-.band {
-  background:
-    radial-gradient(65rem 32rem at 92% 0%, color-mix(in srgb, var(--brand) 5%, transparent), transparent 70%),
-    var(--surface);
-}
-[dir="rtl"] .band {
-  background:
-    radial-gradient(65rem 32rem at 8% 0%, color-mix(in srgb, var(--brand) 5%, transparent), transparent 70%),
-    var(--surface);
-}
+.band { background: var(--surface); }
 .band--ink {
   position: relative; overflow: hidden;
-  background:
-    radial-gradient(54rem 28rem at 88% 12%, rgba(207, 150, 66, 0.1), transparent 70%),
-    radial-gradient(48rem 32rem at 8% 92%, rgba(118, 196, 182, 0.07), transparent 70%),
-    var(--brand-deep);
+  background: var(--brand-deep);
   color: var(--on-dark); border-bottom-color: var(--on-dark-line);
   --ink: var(--on-dark); --ink-soft: var(--on-dark-soft); --muted: var(--on-dark-soft);
   --line: var(--on-dark-line); --line-strong: rgba(242, 245, 244, 0.3); --line-soft: var(--on-dark-line);
   --paper: var(--brand-deep); --surface: rgba(242, 245, 244, 0.04); --accent: var(--accent-lift);
-}
-/* Subtle architectural drafting grid on dark ink band */
-.band--ink::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  background-image:
-    linear-gradient(to right, rgba(242, 245, 244, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(242, 245, 244, 0.03) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.75) 20%, rgba(0, 0, 0, 0.75) 80%, transparent);
-  -webkit-mask-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.75) 20%, rgba(0, 0, 0, 0.75) 80%, transparent);
 }
 .band--ink > .wrap { position: relative; z-index: 1; }
 
@@ -398,22 +368,12 @@ p  { margin: 0 0 1.05em; }
 :lang(ar) .lead { line-height: 1.85; }
 .head { position: relative; max-width: 66ch; margin-bottom: clamp(2.25rem, 1.6rem + 2.2vw, 3.5rem); }
 .head h2 { position: relative; display: inline-block; margin-bottom: 0.65rem; }
-.head h2::before {
-  content: ""; display: block; width: 2.1rem; height: 2px; margin-bottom: 0.7rem;
-  background: var(--accent);
-  transform-origin: left center;
-  transition: width var(--mid) var(--ease-out);
-}
-[dir="rtl"] .head h2::before { transform-origin: right center; }
-.section:hover .head h2::before { width: 3.1rem; }
 .head .lead { margin-bottom: 0; }
 
 /* ---------- Hero (architectural grid + staggered entrance) ---------- */
 .hero {
   position: relative; overflow: hidden;
   background:
-    radial-gradient(60rem 36rem at 82% 22%, rgba(207, 150, 66, 0.13), transparent 66%),
-    radial-gradient(50rem 34rem at 12% 88%, rgba(46, 112, 100, 0.28), transparent 68%),
     linear-gradient(165deg, #173530 0%, var(--brand-deep) 58%, var(--brand-ink) 100%);
   color: var(--on-dark);
   padding-block: clamp(3.75rem, 2.4rem + 5.5vw, 7rem) clamp(3.5rem, 2.4rem + 4vw, 5.5rem);
@@ -421,31 +381,15 @@ p  { margin: 0 0 1.05em; }
 }
 :root[data-theme="dark"] .hero {
   background:
-    radial-gradient(60rem 36rem at 82% 22%, rgba(224, 177, 101, 0.11), transparent 66%),
-    radial-gradient(50rem 34rem at 12% 88%, rgba(31, 74, 67, 0.34), transparent 68%),
     linear-gradient(165deg, #102420 0%, var(--brand-deep) 60%, var(--brand-ink) 100%);
 }
 [dir="rtl"] .hero {
   background:
-    radial-gradient(60rem 36rem at 18% 22%, rgba(207, 150, 66, 0.13), transparent 66%),
-    radial-gradient(50rem 34rem at 88% 88%, rgba(46, 112, 100, 0.28), transparent 68%),
     linear-gradient(195deg, #173530 0%, var(--brand-deep) 58%, var(--brand-ink) 100%);
 }
 :root[data-theme="dark"][dir="rtl"] .hero {
   background:
-    radial-gradient(60rem 36rem at 18% 22%, rgba(224, 177, 101, 0.11), transparent 66%),
-    radial-gradient(50rem 34rem at 88% 88%, rgba(31, 74, 67, 0.34), transparent 68%),
     linear-gradient(195deg, #102420 0%, var(--brand-deep) 60%, var(--brand-ink) 100%);
-}
-/* Fine architectural blueprint lines — pure CSS, zero image requests */
-.hero::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  background-image:
-    linear-gradient(to right, rgba(242, 245, 244, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(242, 245, 244, 0.04) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(ellipse 85% 75% at 50% 42%, #000 18%, transparent 82%);
-  -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 42%, #000 18%, transparent 82%);
 }
 
 .hero__grid {
@@ -527,9 +471,7 @@ p  { margin: 0 0 1.05em; }
   position: relative; overflow: hidden;
   padding: clamp(1.75rem, 1.3rem + 1.4vw, 2.6rem);
   border-inline-end: 1px solid var(--line); border-bottom: 1px solid var(--line);
-  background:
-    radial-gradient(360px circle at var(--mx, 50%) var(--my, 0%), color-mix(in srgb, var(--accent-lift) 8%, transparent), transparent 70%),
-    var(--paper);
+  background: var(--paper);
   transition: background-color var(--mid) var(--ease-out), box-shadow var(--mid) var(--ease-out);
 }
 .card::before {
@@ -703,7 +645,6 @@ p  { margin: 0 0 1.05em; }
 .phero {
   position: relative; overflow: hidden;
   background:
-    radial-gradient(50rem 28rem at 85% 18%, rgba(207, 150, 66, 0.11), transparent 68%),
     linear-gradient(165deg, #173530 0%, var(--brand-deep) 65%, var(--brand-ink) 100%);
   color: var(--on-dark);
   padding-block: clamp(2.75rem, 2rem + 3vw, 4.5rem) clamp(2.25rem, 1.6rem + 2.2vw, 3.5rem);
@@ -711,7 +652,6 @@ p  { margin: 0 0 1.05em; }
 }
 :root[data-theme="dark"] .phero {
   background:
-    radial-gradient(50rem 28rem at 85% 18%, rgba(224, 177, 101, 0.1), transparent 68%),
     linear-gradient(165deg, #102420 0%, var(--brand-deep) 65%, var(--brand-ink) 100%);
 }
 .phero h1 { font-size: clamp(2rem, 1.4rem + 2.6vw, 3.1rem); margin-bottom: 0.65rem; color: var(--on-dark); animation: mz-rise 540ms var(--ease-out) both; }
@@ -819,6 +759,7 @@ html.has-js [data-reveal] {
     transform var(--slow) var(--ease-out) var(--reveal-delay, 0ms);
   will-change: opacity, transform;
 }
+html.has-js.reveal-all [data-reveal],
 html.has-js [data-reveal="in"] {
   opacity: 1;
   transform: translate3d(0, 0, 0);
@@ -887,6 +828,7 @@ html.has-js [data-reveal="in"] {
 }
 
 @media print {
+  html.has-js [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
   .site-head, .drawer, .skip { display: none !important; }
   body { background: #fff; color: #000; }
 }
